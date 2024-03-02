@@ -1,0 +1,13 @@
+/* CSS */
+.block {
+  display: flex;
+  /* Styles for the block */
+}
+.block__element {
+  align-self: center;
+  /* Styles for the element */
+}
+.block__element--modifier {
+  /* Modifier styles */
+  color: red;
+}

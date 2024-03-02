@@ -1,0 +1,117 @@
+* {
+  /* display: flex; */
+  font-family: Roboto;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+nav {
+  /* background-color: aqua; */
+  height: max-content;
+  /* height: 2rem; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  /* justify-content: center; */
+}
+nav .left {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-style: italic;
+}
+nav .left img {
+  width: 2.5rem;
+}
+nav .right ul {
+  display: flex;
+  gap: 1rem;
+  list-style-type: none;
+}
+
+nav .right ul li a {
+  cursor: pointer;
+  border: 1px solid rgb(61, 37, 37);
+  border-radius: 5px;
+  padding: 0.5rem 1rem; // 1rem 1rem 1rem 1rem
+}
+
+nav .right ul li a:hover {
+  color: white;
+  background-color: green;
+  border-color: green;
+}
+
+#home {
+  /* background-color: blueviolet; */
+  height: calc(100vh - 5rem);
+  /* display: grid;
+  grid-template-rows: 40% 40%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* gap: 2rem; */
+}
+#home .avatar {
+  width: 35%;
+  border: 1px solid green;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+#home .avatar img {
+  object-fit: cover;
+  /* width: 60%; */
+  height: auto;
+}
+#home .description {
+  margin-left: 2rem;
+  width: 40%;
+}
+.description .job_title {
+  font-size: 1.5rem;
+  font-style: italic;
+}
+.description h1 {
+  font-size: 2.5rem;
+  /* font-style: italic; */
+}
+
+.description p {
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.description .hero-buttons {
+  margin-bottom: 2rem;
+}
+
+.description .hero-buttons button {
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid rgb(61, 37, 37);
+  border-radius: 5px;
+  padding: 0.5rem 1rem; // 1rem 1rem 1rem 1rem
+}
+
+.description .hero-buttons button:hover {
+  color: white;
+  background-color: green;
+  border-color: green;
+}
+/* .description .hero-buttons {
+  display: flex;
+  gap: 2rem;
+} */
+/* .description .hero-buttons button:nth-child(2) {
+  margin-left: 2rem;
+} */
+/* .description .hero-buttons button:last-child {
+  margin-left: 2rem;
+} */
+.description .hero-buttons button:first-child {
+  margin-right: 2rem;
+}

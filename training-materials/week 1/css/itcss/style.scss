@@ -1,0 +1,14 @@
+// ------------------- MIXINS ---------------------//
+@mixin flexcenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// ------------------- COLORS ---------------------//
+$white: #ffffff;
+$secondary-white: #efefef;
+$main-black: #252525;
+$main-black-actived: #141522;
+$main-gray: #9c9ca4;
+$main-blue: #2b3651;
