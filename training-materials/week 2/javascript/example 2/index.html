@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Input Type</title>
+  </head>
+  <body>
+    <input type="text" id="myInput" placeholder="Enter text" />
+    <button onclick="toggleInputType()">Toggle Type</button>
+
+    <script>
+      function toggleInputType() {
+        var input = document.getElementById("myInput");
+        var currentType = input.getAttribute("type");
+
+        // Toggle between text and password types
+        if (currentType === "text") {
+          input.setAttribute("type", "password");
+        } else {
+          input.setAttribute("type", "text");
+        }
+      }
+    </script>
+  </body>
+</html>
