@@ -112,3 +112,9 @@ nav .right ul li a:hover {
    margin-left: 2rem;
  } */
 /* @import url("./skills.css"); */
+
+@media (max-width: 1010px) {
+  .right {
+    display: none;
+  }
+}
