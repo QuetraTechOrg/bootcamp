@@ -16,6 +16,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 nav .left {
   font-size: 1.5rem;
@@ -112,9 +113,37 @@ nav .right ul li a:hover {
    margin-left: 2rem;
  } */
 /* @import url("./skills.css"); */
+.hamburger {
+  display: none;
+  border: 1px solid white;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem;
+  transition: all 1s ease-in;
+}
+.hamburger svg {
+  cursor: pointer;
+}
+#closeIcon {
+  display: none;
+}
 
+#menu {
+  display: none;
+  position: absolute;
+  right: 5rem;
+  top: 5rem;
+}
 @media (max-width: 1010px) {
   .right {
     display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+}
+@media (min-width: 1010px) {
+  #menu {
+    display: none !important;
   }
 }
