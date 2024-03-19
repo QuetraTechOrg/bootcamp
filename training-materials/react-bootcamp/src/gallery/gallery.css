@@ -1,0 +1,24 @@
+#gallery {
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.gallery-select {
+  display: flex;
+  gap: 1rem;
+}
+.gallery-select span {
+  cursor: pointer;
+  color: #fff;
+  opacity: 50%;
+}
+
+.gallery-select span:hover {
+  opacity: 100%;
+  scale: 1.1;
+}
+.gallery-container {
+  margin-top: 2rem;
+}

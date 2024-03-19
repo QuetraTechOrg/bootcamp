@@ -1,0 +1,114 @@
+* {
+  font-family: Roboto;
+  background: #222;
+  color: white;
+  scroll-behavior: smooth;
+}
+a {
+  text-decoration: none;
+}
+nav {
+  padding-top: 3px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  height: max-content;
+  /* height: 2rem; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav .left {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-style: italic;
+}
+nav .left img {
+  width: 7rem;
+}
+
+nav .right ul {
+  display: flex;
+  gap: 3rem;
+  list-style-type: none;
+}
+
+nav .right ul li a {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+nav .right ul li a:hover {
+  color: rgb(140, 136, 136);
+}
+
+#home {
+  height: calc(100vh - 5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+#home .avatar {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+#home .avatar img {
+  width: 90%;
+}
+#home .description {
+  margin-left: 5rem;
+  width: 40%;
+}
+.description .job_title {
+  font-family: Poppins, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.5);
+}
+.description h1 {
+  font-size: 2.5rem;
+  font-family: poppins, sans-serif;
+  font-size: 70px;
+  color: white;
+}
+
+.description p {
+  font-family: poppins, sans-serif;
+  font-size: 1.1rem;
+  text-align: left;
+  color: #fff;
+}
+
+.description .hero-buttons {
+  margin-bottom: 2rem;
+}
+
+.description .hero-buttons button {
+  color: white;
+  background-color: #333;
+  cursor: pointer;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 15px;
+  padding: 0.5rem 1rem;
+}
+
+.description .hero-buttons button:hover {
+  border-color: #007ced;
+}
+.description .hero-buttons button:active {
+  color: rgb(139, 136, 136);
+}
+.description .hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+}
+/* .description .hero-buttons button:nth-child(2) {
+   margin-left: 2rem;
+ } */
+/* .description .hero-buttons button:last-child {
+   margin-left: 2rem;
+ } */
+/* @import url("./skills.css"); */

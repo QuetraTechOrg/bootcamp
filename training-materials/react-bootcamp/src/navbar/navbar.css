@@ -1,0 +1,42 @@
+* {
+  font-family: Roboto;
+  background: #222;
+  color: white;
+  scroll-behavior: smooth;
+}
+a {
+  text-decoration: none;
+}
+nav {
+  padding-top: 3px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  height: max-content;
+  /* height: 2rem; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav .left {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-style: italic;
+}
+nav .left img {
+  width: 7rem;
+}
+
+nav .right ul {
+  display: flex;
+  gap: 3rem;
+  list-style-type: none;
+}
+
+nav .right ul li a {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+nav .right ul li a:hover {
+  color: rgb(140, 136, 136);
+}
