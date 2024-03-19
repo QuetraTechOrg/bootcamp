@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./gallery.css";
 
 const Gallery = () => {
   const [selectedSection, setSelectedSection] = useState(1);
-  const [containSelected, setContainSelected] = useState("non vide");
+  const [containSelected, setContainSelected] = useState("");
 
   const sectionsData = [
     {
@@ -32,6 +32,13 @@ const Gallery = () => {
   const dataWithoutAll = sectionsData.filter((el) => el.id !== 1);
   const allImagesLink = dataWithoutAll.map((item) => item.image);
 
+  useEffect(() => {
+    const imageToDisplay = sectionsData.filter(
+      (el) => el.id == selectedSection
+    )[0];
+    setContainSelected(imageToDisplay.image);
+  }, [selectedSection]);
+
   return (
     <div id="gallery">
       <h2>Gallery</h2>
@@ -41,7 +48,7 @@ const Gallery = () => {
             key={item.id}
             onClick={() => {
               setSelectedSection(item.id);
-              setContainSelected(item.image);
+              //   setContainSelected(item.image)
             }}
             style={{
               opacity: `${selectedSection === item.id ? "100%" : "50%"}`,
