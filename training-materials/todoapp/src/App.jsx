@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import "./App.css";
 import { Button, Form, Stack, Col, Row, Container } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteTask,
+  saveNewTask,
+  updateTask,
+} from "./store/features/todoSlice";
 
 function App() {
-  const [taskList, setTaskList] = useState([]);
+  const todoState = useSelector((state) => state.todo);
+  const dispatch = useDispatch();
+
   const [newTask, setNewTask] = React.useState("");
   const [action, setAction] = useState("save");
   const [index, setIndex] = useState(null);
 
   const handleNewTask = () => {
     if (newTask) {
-      setTaskList((prev) => [...prev, newTask]);
+      dispatch(saveNewTask(newTask));
       setNewTask("");
     }
   };
+
   const handleDeleteTask = (id) => {
-    setTaskList(taskList.filter((item, index) => index !== id));
+    dispatch(deleteTask(id));
   };
+
   const triggerUpdateTask = (id, oldValue) => {
     setNewTask(oldValue);
     setAction("update");
@@ -25,11 +35,12 @@ function App() {
 
   const handleUpdateTask = () => {
     if (index !== null && newTask) {
-      setTaskList((prev) => {
-        const updatedTasks = [...prev];
-        updatedTasks[index] = newTask;
-        return updatedTasks;
-      });
+      dispatch(
+        updateTask({
+          index: index,
+          newValue: newTask,
+        })
+      );
       setAction("save");
       setIndex(null);
       setNewTask("");
@@ -84,7 +95,7 @@ function App() {
           </Row>
         </Stack>
 
-        {taskList.map((item, index) => (
+        {todoState.taskList.map((item, index) => (
           <Stack
             direction="horizontal"
             gap={3}
