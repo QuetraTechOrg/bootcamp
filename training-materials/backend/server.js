@@ -1,16 +1,18 @@
+import * as dotenv from "dotenv";
+dotenv.config();
 import express from "express";
-import connectDB from "./config/connectDB.js";
+// import connectDB from "./config/database.js";
 import userRoutes from "./router/user.routes.js";
+import database from "./config/database.js";
 
 const app = express();
+
+app.use(express.json());
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 app.use("/user", userRoutes);
-connectDB();
+
+database();
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

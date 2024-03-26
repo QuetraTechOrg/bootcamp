@@ -2,6 +2,7 @@
 @build by https://www.linkedin.com/in/roniceyemeli/
 */
 import mongoose from "mongoose";
+// const { Schema } = mongoose;
 
 const userSchema = new mongoose.Schema(
   {
@@ -20,10 +21,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    company: {
-      type: String,
-      required: true,
-    },
     address: {
       type: String,
       required: true,
@@ -39,10 +36,6 @@ const userSchema = new mongoose.Schema(
     blocked: {
       type: String,
       default: "false",
-    },
-    cart: {
-      type: Array,
-      default: [],
     },
   },
   {
