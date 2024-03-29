@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 // import connectDB from "./config/database.js";
-import userRoutes from "./router/user.routes.js";
+import userRoutes from "./src/router/user.routes.js";
 import database from "./config/database.js";
 
 const app = express();

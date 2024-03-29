@@ -6,38 +6,41 @@ import bcrypt from "bcryptjs";
 import { createAccessToken, createRefreshToken } from "../services/jwt.js";
 
 export const login = async (req, res) => {
-  const data = req.body;
   const { email, password } = req.body;
   try {
-    //----------------------- user credential validation --------------------------//
-    const { error } = loginValidation(data);
-    if (error) return res.status(400).json(error.details[0].message);
-
-    const user = await Users.findOne({ email });
-    if (!user)
+    const user = await Users.findOne({ email: email });
+    if (!user) {
       return res.status(404).json({ message: "this user does not exit !" });
+    }
 
-    const isVerified = await bcrypt.compare(password, user.password);
-    if (!isVerified)
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatch) {
       return res.status(404).json({ message: "wrong credentials !" });
+    }
 
     //---------------- creating token for the new user -----------------------------//
     const accesstoken = createAccessToken({ id: user._id });
     const refreshtoken = createRefreshToken({ id: user._id });
 
-    res.cookie("refreshtoken", refreshtoken, {
-      httpOnly: true,
-      path: "/api/user/refresh_token",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    // res.cookie("refreshtoken", refreshtoken, {
+    //   httpOnly: true,
+    //   path: "/api/user/refresh_token",
+    //   maxAge: 7 * 24 * 60 * 60 * 1000,
+    // });
 
-    res.status(202).json({ success: true, accesstoken: accesstoken });
+    res.status(202).json({
+      success: true,
+      accesstoken: accesstoken,
+      refreshtoken: refreshtoken,
+    });
   } catch (error) {
     res.status(503).json({ success: false, message: error.message });
   }
 };
 export const saveUser = async (req, res) => {
   try {
+    const userAuth = req.user;
     const data = req.body;
     const newUser = {
       name: data.name,
@@ -47,9 +50,10 @@ export const saveUser = async (req, res) => {
       password: data.password,
     };
 
-    const user = new Users({ ...newUser });
+    const hashPasword = await bcrypt.hash(newUser.password, 10);
+    const user = new Users({ ...newUser, password: hashPasword });
     await user.save();
-    res.status(202).json({ message: "User saved!!!" });
+    res.status(202).json({ message: "User saved!!!", user: user });
   } catch (error) {
     res.status(501).json({ success: false, message: error.message });
   }
@@ -65,49 +69,68 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+export const getOneUser = async (req, res) => {
+  try {
+    const { email, phone } = req.params;
+    const user = await Users.findOne({ email: email, phone: phone });
+    res.status(200).json({ data: user });
+  } catch (error) {
+    return res.status(500).json({ msg: error.message });
+  }
+};
+
 // //-------------------------------- UPDATE USER --------------------------------------------//
-// export const updateUser = async (req, res) => {
-//   const data = req.body;
-//   const { name, company, address, phone, password, confirmPassword } = req.body;
-//   try {
-//     if (password) {
-//       if (!confirmPassword)
-//         return res.status(400).json({ msg: "please confirm your password" });
-//       //------------------------------- schema validation------------------------//
-//       const { error } = updateUserValidationWithPassword(data);
-//       if (error) return res.status(400).json(error.details[0].message);
-//       const salt = await bcrypt.genSalt(10);
-//       const passwordHash = await bcrypt.hash(password, salt);
-//       await Users.findOneAndUpdate(
-//         { _id: req.user.id },
-//         {
-//           name: name,
-//           company: company,
-//           address: address,
-//           phone: phone,
-//           password: passwordHash,
-//         }
-//       );
-//       res.status(201).json({ msg: "Profile modified" });
-//     } else {
-//       //------------------------------- schema validation------------------------//
-//       const { error } = updateUserValidationWithoutPassword(data);
-//       if (error) return res.status(400).json(error.details[0].message);
-//       await Users.findOneAndUpdate(
-//         { _id: req.user.id },
-//         { name: name, company: company, address: address, phone: phone }
-//       );
-//       res.status(201).json({ msg: "Profile modified" });
-//     }
-//   } catch (error) {
-//     return res.status(500).json({ msg: error.message });
-//   }
-// };
+export const updateUser = async (req, res) => {
+  const { id } = req.params;
+  const { name, address, phone } = req.body;
+  try {
+    const updatedUser = await Users.findByIdAndUpdate(
+      //filter
+      { _id: id },
+      //data to change
+      { name: name, address: address, phone: phone },
+      //options
+      { new: true }
+    ).select("-password");
+    res.status(201).json({ msg: "Profile modified", data: updatedUser });
+  } catch (error) {
+    return res.status(500).json({ msg: error.message });
+  }
+};
 
 //Fetch USER by his ID
 export const getUserById = async (req, res) => {
   try {
-    const user = await Users.findById(req.params.id).select("-password");
+    const { id } = req.params;
+    const user = await Users.findById(id).select("-password");
+    if (!user)
+      return res.status(404).json({ msg: "This user does not exist !" });
+
+    //query response
+    res.status(201).json({ user: user });
+  } catch (error) {
+    return res.status(500).json({ msg: error.message });
+  }
+};
+
+export const deleteUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await Users.findById(id);
+    if (!user)
+      return res.status(404).json({ msg: "This user does not exist !" });
+    await Users.findByIdAndDelete(id);
+    //query response
+    res.status(201).json({ message: "user deleted!!!" });
+  } catch (error) {
+    return res.status(500).json({ msg: error.message });
+  }
+};
+
+export const getAuthenticatedUser = async (req, res) => {
+  try {
+    const id = req.user.id;
+    const user = await Users.findById(id).select("-password");
     if (!user)
       return res.status(404).json({ msg: "This user does not exist !" });
 
