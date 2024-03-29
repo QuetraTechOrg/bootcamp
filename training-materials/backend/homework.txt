@@ -1,0 +1,6 @@
+CRUD TO-DO
+
+1- Create a model schema for your skills
+skills= frontend or backend 
+domain = UX/UI Design, Web developement, etc...
+available properties:{skills, domain, proficiency, image,description } 
