@@ -14,5 +14,6 @@ CORS ==> Cross origin ressource sharing
 
 
 // migration all html+css to react
+// implement crud operations and crud for skills --> frontend
 // implement crud operations and crud for coding skills --> backend + frontend
 
