@@ -4,3 +4,15 @@ CRUD TO-DO
 skills= frontend or backend 
 domain = UX/UI Design, Web developement, etc...
 available properties:{skills, domain, proficiency, image,description } 
+
+// 200 - 299 --> succès
+// 300 - 399 --> redirection
+// 400 - 499 --> erreur client
+// 500 - 599 --> errur serveur
+
+CORS ==> Cross origin ressource sharing
+
+
+// migration all html+css to react
+// implement crud operations and crud for coding skills --> backend + frontend
+

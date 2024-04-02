@@ -3,7 +3,7 @@
 */
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const skillSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -11,31 +11,18 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
-    email: {
-      type: String,
-      unique: true,
-      required: true,
-      lowercase: true,
-    },
-    password: {
+    description: {
       type: String,
       required: true,
     },
-    address: {
+    icon: {
       type: String,
       required: true,
     },
-    phone: {
-      type: Number, //256544852485
-      required: true,
-    },
-    role: {
-      type: Number,
-      default: 0,
-    },
-    blocked: {
+    domain: {
       type: String,
-      default: "false",
+      required: true,
+      enum: ["backend", "frontend", "devops"],
     },
   },
   {
@@ -43,4 +30,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Users", userSchema);
+export default mongoose.model("Skills", skillSchema);
